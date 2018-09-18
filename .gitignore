@@ -1,0 +1,17 @@
+# Log files of installation
+*.log
+
+# Some hidden files from MAC
+.DS_STORE
+
+# Latex extra outputfiles
+*.aux
+*.log
+*.nav
+*.snm
+*.synctex.gz
+*.toc
+
+# Fortran and C compile files
+*.out
+*.o
