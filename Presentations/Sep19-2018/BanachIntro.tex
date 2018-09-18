@@ -1,0 +1,317 @@
+\documentclass{beamer}		%% The Beamer document class formats for slides. 
+\usepackage{amssymb,amsfonts}   % For better support of math
+\usepackage{graphicx}	        % Enable for eps figures, if they occur
+
+\usetheme{Copenhagen} 		%% Formats the slides with a red and gray theme, which seems appropriate for MIT.  
+
+%%%% Extra Theorem like environments. 
+%%%% theorem, lemma,definition, example, examples, and corollary are already defined. 
+
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remarks}[theorem]{Remarks}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+%\newtheorem{definition}[theorem]{Definition}
+
+
+
+
+\newcommand{\C}{\mathbb C} % blackboard math , for ``complex,'' etc
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\N}{\mathbb N}
+\newcommand{\F}{\mathbb F}
+
+\title{A short introduction in Banach Spaces}
+\author{SCTIA-2018}
+\institute[UoA]{The University of Auckland}
+\date{September $18^\text{th}$, 2018}
+
+\begin{document}
+
+\begin{frame}
+\titlepage  
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Normed spaces}
+\subsection{Vector spaces}
+
+\frame{\frametitle{Vector Spaces}
+A vector space $V$ is a set with two operations:
+\begin{itemize}
+\item An operation between elements called addition ``+''.
+\item An operation over a field $\F$, e.g. $\R$, called scalar
+  multiplication ``$\cdot$''.
+\end{itemize}
+
+\vspace{1cm}
+These two operations must obey the following rules:
+\begin{enumerate} 
+\item \textbf{Closing property:} if $ u,v \in V $ then $ u+v \in V $. 
+\item \textbf{Commutative property:} $ u+v=v+u $ for all $ u,v \in V $.
+\item \textbf{Associative property:}  $ u+(v+w)=(u+v)+w$  for all $ u,v,w \in V$ 
+\end{enumerate}
+}
+
+\frame{
+\begin{enumerate}\setcounter{enumi}{3}
+\item \textbf{Zero element property:} There exists an element
+  $\mathbf{0} \in V$, such that $u+\mathbf{0}=\mathbf{0}+u$.
+\item \textbf{Additive inverse property:} For each $u \in V$ there exists an element
+  $v \in V$, such that $u+v=v+u=\mathbf{0}$. 
+\item \textbf{Closing property over scalar multiplication:} if $t \in
+  \F$ and $u \in V$ then $t \cdot u \in V$.
+\item \textbf{Distributive property 1:} $t \cdot (u+v) =t\cdot u +t\cdot
+  v$ for each $t \in \F$ and all elements $u,v \in V$.
+\item \textbf{Distributive property 2:}  $(s + t)\cdot u =s\cdot u +t
+  \cdot u$ for each $u \in V$ and all $s,t \in V$.
+\item \textbf{Scalar multiplicative property:} $1 \cdot u = u$ for all
+  $u \in V$, where $1$ is the multiplicative identity of $\F$
+\end{enumerate}
+}
+
+\frame{\frametitle{Examples:}
+\textbf{Examples 1:} The $n$-dimensional Euclidean space
+$\R^n$ over the real field $\R$. \vspace{0.5cm}
+
+\textbf{Examples 2:} The set of all smooth functions over the reals
+$C(R)$. \vspace{0.5cm}
+
+\textbf{Examples 3:} The set of all periodic functions of a fixed
+period $T$. \vspace{0.5cm}
+
+\textbf{Examples 4} The set of all convergent sequences. \vspace{0.5cm}
+}
+
+
+\frame{\frametitle{Bases:}
+A finite subset $\{x_1,x_2,...,x_n \}$ of $V$ is said to be linearly
+independent if 
+$$\lambda_1x_1+\lambda_2x_2+...+\lambda_nx_n=\mathbf{0} \rightarrow \lambda_1=\lambda_2=...=\lambda_n=0.$$
+
+An arbitrary subset $X\subset V$ is said to be \textbf{linearly
+  independent} if every finite subset of $X$ is linearly independent. \vspace{0.5cm}
+
+A \textbf{basis} is a subset $X\subset V$ if it is linearly
+independent and spans $V$, i.e., $\text{span}(X)=V$.
+}
+
+\frame{\frametitle{Basic facts about bases:}
+\begin{enumerate}
+\item Every element $x \in V$ admits a unique \textbf{basis
+    decomposition}.
+\item if $Y \subset V$ and $\text{span}(Y)=V$, then $Y$ contains a
+  basis for $V$.
+\item Every non-zero vector space has a basis.
+\item Every linearly independent subset $Y$ can be extended to form a
+  basis for $V$.
+\item A vector space is \textbf{finite dimensional} if it admits a
+  basis with only finite many elements; otherwise, it is called
+  \textbf{infinite dimensional}.
+\end{enumerate}
+}
+
+\subsection{Banach spaces}
+\frame{\frametitle{Normed linear spaces:}
+A vector space $V$ is called a \textbf{normed linear space} if there exist
+a function called $\textbf{norm}$, denoted $|| \cdot ||$, from $V$ into $\R$ such that:
+\begin{enumerate}
+\item $|| x || \geq 0$ for all $x \in V$ and $|| x ||=0$ if, and only
+  if, $x=0$.
+\item $||\lambda x|| = |\lambda| ||x||$ for all $x \in V$ and $\lambda
+  \in \F$.
+\item $||x+y|| \leq ||x|| +||y||$ for all $x,y\in V$.
+\end{enumerate}
+\vspace{0.5cm}
+A norm gives $V$ a topology induced by the following metric 
+$$\rho(x,y)=||y-x||$$
+
+\centering
+{\Large \color{red} A vector space $V$ can have different norms}
+
+Also, for the rest of this slides our field is going to be $\R$.
+}
+
+\frame{\frametitle{Equivalent norms}
+So a vector space $V$ may have different norms, that sounds
+exciting. Weeeeeeeeelllllllll, sometimes two norms behave ``topologically'' the
+same.  \vspace{0.5cm}
+
+Let $|| \cdot ||_1$ and $|| \cdot ||_2$ be two different norms on a
+vector space $V$. We say that they are \textbf{equivalent} if, and
+only if, there exists real number $0<m \leq M<\infty$ such that $m
+||v||_1\leq ||v||_2\leq M||v||_1$ for all $v\in V$.
+
+\begin{theorem}[Fundamental Theorem of Finite Dimensional Normed
+  Linear Spaces]
+	ALL norms on a FINITE dimensional vector space are EQUIVALENT.
+\end{theorem}
+}
+
+\frame{\frametitle{We can talk about continuity}
+Since we have a metric induced by $||\cdot||$, we can talk about
+continuity of a function between normed linear spaces.\vspace{0.5cm}
+
+Let $f$ be a function between the normed space $(V, ||\cdot||_V)$ and
+$(W,||\cdot||_W)$, i.g. $f:V \rightarrow W$. Then $f$ is continuous 
+at $v\in V$ if
+$$\forall x \in V \quad\forall \epsilon>0 \quad \exists \delta>0:
+\quad ||v-x||_V<\delta \rightarrow ||f(v)-f(x) ||_W <\epsilon$$
+\begin{corollary}
+	Let $(V,||\cdot||_V)$ be a normed linear space and
+        $(W,||\cdot||_W)$ be a \textbf{finite dimensional} normed
+        linear space. If $f$ is a continuous function between $V$ and
+        $W$ then $f$ is also continuous function if $||\cdot||_W$ is
+        replaced by any other norm of $W$
+\end{corollary}
+}
+
+\frame{\frametitle{Banach spaces... Finally!. Please stop talking Andrus}
+A normed linear space $V$ is called a Banach space if it is a
+\textbf{complete metric space} under the metric induced by the norm.\vspace{0.5cm}
+
+Intuitively, if a set is complete it means that it does not have
+\textbf{holes}. \vspace{0.5cm}
+
+More formally, it means that any Cauchy sequence in $V$ converges in
+$V$... hmmm...what is a Cauchy sequence? \vspace{0.5cm}
+
+A sequence $\{x_n\}^{\infty}_{n=1}$ in $V$ is a Cauchy sequence if it fullfils:
+$$\forall \epsilon >0, \quad \exists N \in \N: \quad m,n>N \rightarrow
+||x_m-x_n ||_V<\epsilon$$
+}
+
+\frame{\frametitle{Again, finite dimensional spaces }
+\begin{corollary}
+	Every finite dimensional normed linear space over the fields
+        $\R$ or $\C$ is a Banach space 
+\end{corollary}
+
+\begin{corollary}
+	Let $(Y,||\cdot||)$ be a finite dimensional subspace of
+        $(X,||\cdot||)$. Then $Y$ is a closed subspace of $X$.
+\end{corollary}\vspace{0.5cm}
+
+Wait, what it means to be closed? well, we called a set $A$
+\textbf{closed} if the limit point of any convergent sequence lies in
+$A$ (we can go more abstract but this is enough for us). 
+}
+
+\section{Linear Operators}
+\frame{\frametitle{Linear Operators}
+A linear operator $T$ between vector spaces $V$ and $W$ is a function that
+satisfies the following conditions:
+\begin{enumerate}
+\item $T(u+v) = T(u)+T(v)$ for all $u,v \in V$
+\item $T(\lambda u) = \lambda T(u)$ for all $u\in V$ and $\lambda \in
+  \F$.
+\end{enumerate} \vspace{0.5cm}
+
+Additionally, if $(V, ||\cdot||_V)$ and $(W, ||\cdot||_W)$ are normed
+linear spaces. Then a linear operator \textbf{might} be
+\textbf{bounded linear operator} which means that there exist an $M \in
+\R$, such that
+$$||T(x)||_w\leq M ||x||_V \qquad \text{for all } x\in V$$
+}
+
+\frame{\frametitle{Bounded linear operators and continuity}
+\begin{theorem}[Continuity for the people]
+	Let $(V,||\cdot||_V)$ and $(W,||\cdot||_W)$ be  normed linear space and
+        $(W,||\cdot||_W)$ and let $T:V\rightarrow W$ be a linear
+        operator. Then the following are equivalent: 
+
+$T$ is continuous $\leftrightarrow$ $T$ is a bounded operator.
+\end{theorem}
+}
+
+\frame{\frametitle{The space of linear operators}
+Let $(V,||\cdot||_V)$ and $(W,||\cdot||_W)$ be normed linear
+spaces. Then by $B(V,W)$ we denote the space of all bounded linear
+operators from $V$ to $W$.\vspace{0.5cm}
+
+Interestingly, $B(V,W)$  is a vector space and we can define an operator norm
+for $B(V,W)$ in the following form:
+$$||T||:=\text{sup}\{||T(x)||_W: ||x||_V=1\}$$
+
+\begin{theorem}
+	Let $(V,||\cdot||_V)$ be a normed linear space and
+        $(W,||\cdot||_W)$ be  normed linear  ({\color{red} Banach}) space and
+        $(W,||\cdot||_W)$. Then $B(V,W)$ is a normed linear
+        ({\color{red} Banach}) space with the operator norm as defined above.
+\end{theorem}
+}
+
+\frame{\frametitle{Finite dimension are useful and boring}
+\begin{theorem}
+	All linear operators defined on finite dimensional normed
+        linear spaces are continuous.
+\end{theorem}
+\begin{corollary}
+	Any two $n$-dimensional normed linear space over the same
+        field $\F$ are isomorphic. 
+\end{corollary}
+\begin{corollary}
+	A normed linear space $(X,||\cdot||)$ is finite dimensional
+        if, and only if, every linear functional on $X$ is continuous.
+\end{corollary}
+{Basically, finite dimensional normed linear spaces largely
+  reduces to linear algebra and matrices.}
+}
+
+\frame{\frametitle{What about differentiability?}
+There exist two different
+notion of differentiability
+\begin{itemize}
+\item Frechet differentiability related to the Jacobian in finite dimensions.
+\item Gâteaux differentiability related to directional derivatives in
+  finite dimensions. 
+\end{itemize} \vspace{0.5cm}
+}
+
+\frame{\frametitle{What about differentiability 2?}
+Let $V$ and $W$ be normed vector spaces, and let $U\subset V$ be an
+open set of $V$. A function $f: U \rightarrow W$ is called \textbf{Frechet
+differentiable} if there exist a bounded linear operator $T \in B(V,W)$
+such that:
+$$\text{lim}_{t\rightarrow 0} \frac{||f(x+h)-f(x)-Th||_W}{||h||_V}=0$$
+}
+
+\frame{\frametitle{Acknowledgement}
+Warren Moore fantastic notes on Functional Analysis (MATHS761).
+}
+
+
+
+% \frame{
+% \begin{theorem}[my great theorem]
+% 	This theorem proves everything.
+% \end{theorem}
+
+% \begin{example}
+% 	For example it proves \alert{this}! % "alert" makes it red
+% \end{example}
+% }
+
+
+% \frame{
+% You can typeset equations just as in latex:
+% \[
+% \int_0^1 x\, dx = 1/2,
+% \]
+% or
+% $$
+% \sum_{i = 1}^\infty i = -\frac{1}{12}
+% $$
+% or
+% \begin{equation*}
+% 1 - 1 + 1 - \cdots = \frac{1}{2}.
+% \end{equation*}
+
+% }
+
+
+
+\end{document}
+

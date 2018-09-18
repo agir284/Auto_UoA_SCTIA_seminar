@@ -1,0 +1,4 @@
+\beamer@sectionintoc {1}{Normed spaces}{2}{0}{1}
+\beamer@subsectionintoc {1}{1}{Vector spaces}{2}{0}{1}
+\beamer@subsectionintoc {1}{2}{Banach spaces}{7}{0}{1}
+\beamer@sectionintoc {2}{Linear Operators}{12}{0}{2}
